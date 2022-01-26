@@ -1,8 +1,10 @@
 # About
 
-This is in exercise done in class. Assignment was to find an API, make a call to access data with JSON file, read in data and make changes to the dataframe. 
+This folder contains several notebooks that were made while following Pluralsight's course [Combining and Shaping Data](https://app.pluralsight.com/library/courses/combining-shaping-data/table-of-contents).  
 
-I chose a zoo animal API, [found here]('http://zoo-animal-api.herokuapp.com/animals/rand/10), that returns ten random animals. 
+Description from the website:
+
+"Connecting the dots between data from different sources is becoming the most sought-after skill these days for everyone ranging from business professionals to data scientists. In this course, Combining and Shaping Data, you will gain the ability to connect the dots by pulling together data from disparate sources and shaping it so that extracting connections and relationships becomes relatively easy. [...]"
 
 ## Running the Program
 
@@ -21,7 +23,7 @@ pip install jupyter
 1. Clone or download the repo, save to location of your choice.
 2. Open command line and type `jupyter notebook`, or open from start menu.
 3. In the notebook console, navigate to the location of the saved file in your computer.
-4. Open the file `animal-api.ipynb`.
+4. Open whichever `.ipynb` you wish to use.
 5. Run all the cells.
 
 Recommended for the first time running, go to `Kernel` tab and click `Restart & Run All`.
