@@ -1,22 +1,26 @@
 import csv
 
 
-stocks = ['aapl', 'f', 'msft']
+with open('stock_data.csv', 'w') as f:
+	
+	stocks = ['aapl', 'f']
 
-for stock in stocks: 
-	file = open("../datasets/" + stock + ".csv", "r")
-	reader = csv.reader(file)
-	headers = next(reader, None)
+	for stock in stocks: 
+		file = open("../datasets/" + stock + ".csv", "r")
+		reader = csv.reader(file)
+		headers = next(reader, None)
 
-	print(headers)
+		count = 0
 
-	count = 0
+		for x in reader:
+			# date, open, close, volume
+			# commas for csv
+			f.write(stock + "," + x[0] + "," + x[1] + "," + x[4] + "," + x[5] + "/n")
+			count = count + 1
 
-	for x in reader:
-		# date, open, close, volume
-		print(x[0], x[1], x[4], x[5])
-		count = count + 1
+		print(count)
 
-	print(count)
+		file.close()
 
-	file.close()
+f.close()
+print("Done")
