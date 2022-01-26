@@ -15,7 +15,7 @@ with open('stock_data.csv', 'w', encoding='utf-8') as f:
 		for x in reader:
 			# date, open, close, volume
 			# commas for csv
-			f.write(stock + "," + x[0] + "," + x[1] + "," + x[4] + "," + x[5] + "\n")
+			f.write(stock + "," + x[9] + "," + x[3] + "," + x[0] + "," + x[5] + "\n")
 			count = count + 1
 
 		print(count)
