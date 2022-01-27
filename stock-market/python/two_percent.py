@@ -3,7 +3,7 @@ import csv
 
 count = 0
 two_percent = []
-file = 'stock_data.csv'
+file = '../datasets/stock_data.csv'
 
 with open(file, 'r') as csvfile:
 

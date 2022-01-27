@@ -1,7 +1,7 @@
 import csv
 
 
-with open('stock_data.csv', 'w', encoding='utf-8') as f:
+with open('../datasets/stock_data.csv', 'w', encoding='utf-8') as f:
 	
 	stocks = ['aapl', 'f']
 
