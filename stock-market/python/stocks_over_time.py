@@ -3,24 +3,37 @@ from datetime import datetime
 from dateutil.parser import parse
 
 
-# Goal: Calculate value of holdings over time
-# Goal: Calc and sort daily diff of holdings over time
-
+shares = {"googl": 10, "f": 1000}
+market_dates = []
 # Key is tuple (symbol, date)
 # Value is tuple (open, close)
-stock_dict = {}
+myDict = {}
 
-stock_sym = "googl"
-file_name = "../datasets/" + stock_sym + ".csv"
+for x in shares.keys():
+	stock_sym = x
+	file_name = "../datasets/" + stock_sym + ".csv"
 
-f = open(file_name, "r")
-reader = csv.reader(f)
-next(reader, None) # Skip headers
+	f = open(file_name, "r")
+	reader = csv.reader(f)
+	next(reader, None) # Skip headers
 
-# date[9], open[3], high[1], low[2], close[0], volume[5]
-for data in reader:
-	stock_dict[(stock_sym, parse(data[9]))] = float(data[3]), float(data[0])
+	# date[9], open[3], high[1], low[2], close[0], volume[5]
+	for data in reader:
+		if parse(data[9]) not in market_dates:
+			market_dates.append(parse(data[9]))
+		myDict[(stock_sym, parse(data[9]))] = float(data[3]), float(data[0])
 
-for x in stock_dict:
-	print(x, stock_dict[x])
-print(len(stock_dict))
+print(myDict)
+
+total = {}
+
+# TODO: Won't worl, find fix
+# for date in sorted(market_dates):
+# 	for stk in shares.keys():
+# 		if date in total:
+# 			total[date] = total[date] + myDict[(stk, date)][1]*shares[stk]
+# 		else:
+# 			total[date] = myDict[(stk, date)][1]*shares[stk]
+
+# for date in sorted(market_dates):
+# 	print(date, total[date])
