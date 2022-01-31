@@ -1,6 +1,7 @@
 import csv
 from datetime import datetime
 from dateutil.parser import parse
+import operator
 
 
 shares = {"googl": 10, "f": 1000}
@@ -23,11 +24,11 @@ for x in shares.keys():
 			market_dates.append(parse(data[9]))
 		myDict[(stock_sym, parse(data[9]))] = float(data[3]), float(data[0])
 
-print(myDict)
+# print(myDict)
 
-total = {}
+diff = {}
 
-# TODO: Won't worl, find fix
+# TODO: Won't work, find fix
 # for date in sorted(market_dates):
 # 	for stk in shares.keys():
 # 		if date in total:
@@ -37,3 +38,15 @@ total = {}
 
 # for date in sorted(market_dates):
 # 	print(date, total[date])
+
+
+# for date in sorted(market_dates):
+# 	for stk in shares.keys():
+# 		if date in diff:
+# 			close_less_open = (myDict[(stk, date)][1] - myDict[(stk, date)][0])
+# 			diff[date] = diff[date] + close_less_open * shares[stk]
+# 		else:
+# 			diff[date] = (myDict[(stk, date)][1] - myDict[(stk, date)][0]) * shares[stk]
+
+# for date in sorted(market_dates):
+# 	print(date, diff[date])
