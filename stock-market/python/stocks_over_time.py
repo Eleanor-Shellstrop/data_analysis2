@@ -24,29 +24,29 @@ for x in shares.keys():
 			market_dates.append(parse(data[9]))
 		myDict[(stock_sym, parse(data[9]))] = float(data[3]), float(data[0])
 
-# print(myDict)
+
+total = {}
+# TODO: Won't work, find fix
+for date in sorted(market_dates):
+	for stk in shares.keys():
+		if date in total:
+			total[date] = total[date] + myDict[(stk, date)][1]*shares[stk]
+		else:
+			total[date] = myDict[(stk, date)][1]*shares[stk]
+
+for date in sorted(market_dates):
+	print(date, total[date])
+
 
 diff = {}
-
 # TODO: Won't work, find fix
-# for date in sorted(market_dates):
-# 	for stk in shares.keys():
-# 		if date in total:
-# 			total[date] = total[date] + myDict[(stk, date)][1]*shares[stk]
-# 		else:
-# 			total[date] = myDict[(stk, date)][1]*shares[stk]
+for date in sorted(market_dates):
+	for stk in shares.keys():
+		if date in diff:
+			close_less_open = (myDict[(stk, date)][1] - myDict[(stk, date)][0])
+			diff[date] = diff[date] + close_less_open * shares[stk]
+		else:
+			diff[date] = (myDict[(stk, date)][1] - myDict[(stk, date)][0]) * shares[stk]
 
-# for date in sorted(market_dates):
-# 	print(date, total[date])
-
-
-# for date in sorted(market_dates):
-# 	for stk in shares.keys():
-# 		if date in diff:
-# 			close_less_open = (myDict[(stk, date)][1] - myDict[(stk, date)][0])
-# 			diff[date] = diff[date] + close_less_open * shares[stk]
-# 		else:
-# 			diff[date] = (myDict[(stk, date)][1] - myDict[(stk, date)][0]) * shares[stk]
-
-# for date in sorted(market_dates):
-# 	print(date, diff[date])
+for date in sorted(market_dates):
+	print(date, diff[date])
