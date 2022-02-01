@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 from dateutil.parser import parse
-import operator
+import pandas as pd
 
 
 shares = {"googl": 10, "f": 1000}
@@ -25,28 +25,32 @@ for x in shares.keys():
 		myDict[(stock_sym, parse(data[9]))] = float(data[3]), float(data[0])
 
 
-total = {}
-# TODO: Won't work, find fix
-for date in sorted(market_dates):
-	for stk in shares.keys():
-		if date in total:
-			total[date] = total[date] + myDict[(stk, date)][1]*shares[stk]
-		else:
-			total[date] = myDict[(stk, date)][1]*shares[stk]
+# Make list for df
+all_stocks = []
 
-for date in sorted(market_dates):
-	print(date, total[date])
+for stk, date in myDict:
+	sym = stk
+	day = date
+	opn = myDict[(stk, date)][0]
+	cls = myDict[(stk, date)][1]
+	if sym == 'googl':
+		opn = opn * 10
+		cls = cls * 10
+	if sym == 'f': 
+		opn = opn * 1000
+		cls = cls * 1000
+	all_stocks.append([sym, day, opn, cls])
 
+# DF for date and sum of stocks
+df = pd.DataFrame(all_stocks)
+df.columns = ["stock", "date", "opening_amt", "closing_amt"]
 
-diff = {}
-# TODO: Won't work, find fix
-for date in sorted(market_dates):
-	for stk in shares.keys():
-		if date in diff:
-			close_less_open = (myDict[(stk, date)][1] - myDict[(stk, date)][0])
-			diff[date] = diff[date] + close_less_open * shares[stk]
-		else:
-			diff[date] = (myDict[(stk, date)][1] - myDict[(stk, date)][0]) * shares[stk]
+# DF for only day end totals
+day_end_totals = df.groupby(["date"], as_index=False).agg({"closing_amt": "sum"})
 
-for date in sorted(market_dates):
-	print(date, diff[date])
+# DF for day opening and day end totals
+day_diff_totals = df.groupby(["date"], as_index=False).agg({"opening_amt": "sum", "closing_amt": "sum"})
+
+# Add column for day difference
+day_diff_totals["close_less_open"] = day_diff_totals["closing_amt"] - day_diff_totals["opening_amt"]
+print(day_diff_totals.head(20))
