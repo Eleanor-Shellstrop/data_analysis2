@@ -4,7 +4,8 @@ import pygal
 from pygal.style import CleanStyle
 
 
-stock_sym = ['googl']
+stock_prices = {}
+stock_sym = ['aapl', 'f']
 
 for symbol in stock_sym:
 	file_name = "../datasets/" + symbol + ".csv"
@@ -13,14 +14,19 @@ for symbol in stock_sym:
 	next(reader, None)
 	dates = []
 	dataset = []
+	count = 0
 	# date[9], close[0]
 	for x in reader:
-		dates.append(x[9])
-		dataset.append(float(x[0]))
+		count = count + 1
+		if count%10 ==0:
+			dates.append(x[9])
+			dataset.append(float(x[0]))
+	stock_prices[symbol] = list(reversed(dataset))
 
 line_chart = pygal.Line(style=CleanStyle)
 line_chart.title = "Stock Prices"
 line_chart.x_labels = dates 
-line_chart.add("googl", dataset)
+for symbol in stock_sym:
+	line_chart.add(symbol, stock_prices[symbol])
 
-line_chart.render_to_file('stock-chart.svg')
+line_chart.render_to_file('stocks-chart.svg')
