@@ -1,8 +1,13 @@
 # About
 
-This is in exercise done in class. Assignment was to find an API, make a call to access data with JSON file, read in data and make changes to the dataframe. 
+This is an in-class exercise from 1/27/2022.
 
-I chose a zoo animal API, [found here]('http://zoo-animal-api.herokuapp.com/animals/rand/10), that returns ten random animals. 
+Instructions to class:
+1. Find a dataset to work with.
+2. With your dataset, try a few examples of querying and selecting data by slicing, masking, or query()
+3. Analyze your data; what do you see in it? Anything you find interesting?
+4. Calculate some fields with your data like I did above.
+5. Try graphing / visualizing your data either with Matplotlib or df.plot()
 
 # Running the Program
 
@@ -21,7 +26,7 @@ pip install jupyter
 1. Clone or download the repo, save to location of your choice.
 2. Open command line and type `jupyter notebook`, or open from start menu.
 3. In the notebook console, navigate to the location of the saved file in your computer.
-4. Open the file `animal-api.ipynb`.
+4. Open the file `restaurants.ipynb`.
 5. Run all the cells.
 
 Recommended for the first time running, go to `Kernel` tab and click `Restart & Run All`.
